@@ -18,7 +18,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _controller = AnimationController(
@@ -40,7 +39,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _animation.removeListener(() {});
     _controller.dispose();
