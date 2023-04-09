@@ -1,4 +1,6 @@
+import 'package:covid_tracker/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class StatCard extends StatelessWidget {
   final String label;
@@ -13,18 +15,18 @@ class StatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       height: 50,
       // margin: ,
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        color: Colors.grey,
-        borderRadius: BorderRadius.circular(8),
+        color: AppColors.shimmerBaseColor,
+        borderRadius: BorderRadius.circular(4),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label),
+          Text(label, style: GoogleFonts.poppins(fontWeight: FontWeight.w500)),
           Text(population.toString()),
         ],
       ),

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
+  static String routeName = '/splash';
   const SplashScreen({super.key});
 
   @override
@@ -28,10 +29,10 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     _controller.repeat();
 
     Timer(
-      Duration(seconds: 3),
-      () => Navigator.of(context).push(
+      const Duration(seconds: 3),
+      () => Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => WorldStatsScreen(),
+          builder: (context) => const WorldStatsScreen(),
         ),
       ),
     );
@@ -39,9 +40,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
   @override
   void dispose() {
-    super.dispose();
-    _animation.removeListener(() {});
     _controller.dispose();
+    _animation.removeListener(() {});
+    super.dispose();
   }
 
   @override
@@ -50,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/background-image.png'),
             fit: BoxFit.fill,

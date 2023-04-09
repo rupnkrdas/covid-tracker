@@ -1,7 +1,11 @@
 import 'dart:convert';
 
-class WorldStatsModel {
+import 'country_info.dart';
+
+class CountryStatsModel {
   int? updated;
+  String? countryName;
+  CountryInfo? countryInfo;
   int? cases;
   int? todayCases;
   int? deaths;
@@ -11,20 +15,22 @@ class WorldStatsModel {
   int? active;
   int? critical;
   int? casesPerOneMillion;
-  double? deathsPerOneMillion;
+  int? deathsPerOneMillion;
   int? tests;
-  double? testsPerOneMillion;
+  int? testsPerOneMillion;
   int? population;
+  String? continent;
   int? oneCasePerPeople;
   int? oneDeathPerPeople;
   int? oneTestPerPeople;
   double? activePerOneMillion;
   double? recoveredPerOneMillion;
-  int? criticalPerOneMillion;
-  int? affectedCountries;
+  double? criticalPerOneMillion;
 
-  WorldStatsModel({
+  CountryStatsModel({
     this.updated,
+    this.countryName,
+    this.countryInfo,
     this.cases,
     this.todayCases,
     this.deaths,
@@ -38,18 +44,20 @@ class WorldStatsModel {
     this.tests,
     this.testsPerOneMillion,
     this.population,
+    this.continent,
     this.oneCasePerPeople,
     this.oneDeathPerPeople,
     this.oneTestPerPeople,
     this.activePerOneMillion,
     this.recoveredPerOneMillion,
     this.criticalPerOneMillion,
-    this.affectedCountries,
   });
 
-  factory WorldStatsModel.fromMap(Map<String, dynamic> data) {
-    return WorldStatsModel(
+  factory CountryStatsModel.fromMap(Map<String, dynamic> data) {
+    return CountryStatsModel(
       updated: data['updated'] as int?,
+      countryName: data['country'] as String?,
+      countryInfo: data['countryInfo'] == null ? null : CountryInfo.fromMap(data['countryInfo'] as Map<String, dynamic>),
       cases: data['cases'] as int?,
       todayCases: data['todayCases'] as int?,
       deaths: data['deaths'] as int?,
@@ -59,23 +67,24 @@ class WorldStatsModel {
       active: data['active'] as int?,
       critical: data['critical'] as int?,
       casesPerOneMillion: data['casesPerOneMillion'] as int?,
-      deathsPerOneMillion: data['deathsPerOneMillion'] as double?,
+      deathsPerOneMillion: data['deathsPerOneMillion'] as int?,
       tests: data['tests'] as int?,
-      testsPerOneMillion: (data['testsPerOneMillion'] as num?)?.toDouble(),
+      testsPerOneMillion: data['testsPerOneMillion'] as int?,
       population: data['population'] as int?,
+      continent: data['continent'] as String?,
       oneCasePerPeople: data['oneCasePerPeople'] as int?,
       oneDeathPerPeople: data['oneDeathPerPeople'] as int?,
       oneTestPerPeople: data['oneTestPerPeople'] as int?,
       activePerOneMillion: (data['activePerOneMillion'] as num?)?.toDouble(),
-      recoveredPerOneMillion:
-          (data['recoveredPerOneMillion'] as num?)?.toDouble(),
-      criticalPerOneMillion: data['criticalPerOneMillion'] as int?,
-      affectedCountries: data['affectedCountries'] as int?,
+      recoveredPerOneMillion: (data['recoveredPerOneMillion'] as num?)?.toDouble(),
+      criticalPerOneMillion: (data['criticalPerOneMillion'] as num?)?.toDouble(),
     );
   }
 
   Map<String, dynamic> toMap() => {
         'updated': updated,
+        'country': countryName,
+        'countryInfo': countryInfo?.toMap(),
         'cases': cases,
         'todayCases': todayCases,
         'deaths': deaths,
@@ -89,24 +98,24 @@ class WorldStatsModel {
         'tests': tests,
         'testsPerOneMillion': testsPerOneMillion,
         'population': population,
+        'continent': continent,
         'oneCasePerPeople': oneCasePerPeople,
         'oneDeathPerPeople': oneDeathPerPeople,
         'oneTestPerPeople': oneTestPerPeople,
         'activePerOneMillion': activePerOneMillion,
         'recoveredPerOneMillion': recoveredPerOneMillion,
         'criticalPerOneMillion': criticalPerOneMillion,
-        'affectedCountries': affectedCountries,
       };
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [WorldStatsModel].
-  factory WorldStatsModel.fromJson(String data) {
-    return WorldStatsModel.fromMap(json.decode(data) as Map<String, dynamic>);
+  /// Parses the string and returns the resulting Json object as [CountryStatsModel].
+  factory CountryStatsModel.fromJson(String data) {
+    return CountryStatsModel.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
-  /// Converts [WorldStatsModel] to a JSON string.
+  /// Converts [CountryStatsModel] to a JSON string.
   String toJson() => json.encode(toMap());
 }
